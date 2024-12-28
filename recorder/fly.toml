@@ -1,0 +1,25 @@
+app = "unicorn-galaxy-recorder"
+primary_region = "sjc"
+
+[build]
+  image = "owntracks/recorder:latest"
+
+[env]
+  OTR_HOST = "unicorn-galaxy-mqtt.internal"
+  OTR_PORT = "1883"
+
+[http_service]
+  internal_port = 8083
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+  [http_service.concurrency]
+    type = "requests"
+    soft_limit = 200
+    hard_limit = 250
+
+[mounts]
+  source = "unicorn_galaxy_recorder"
+  destination = "/store"
+  initial_size = "10gb"
