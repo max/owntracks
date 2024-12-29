@@ -15,7 +15,12 @@ services:
     restart: unless-stopped
 
   frontend:
-    image: owntracks/frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    # This doesn't have a namespace because it's a local image.
+    # I should consider namespacing my self-built images.
+    image: owntracks-frontend
     depends_on:
       - recorder
     environment:
@@ -24,10 +29,6 @@ services:
       - SERVER_PORT=8083
     ports:
       - 8080:8080
-    volumes:
-      # The docs don't make it clear that this is required. When this file is
-      # missing, I get a browser error.
-      - ./frontend/config.js:/usr/share/nginx/html/config/config.js
     restart: unless-stopped
 
   recorder:
