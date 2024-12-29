@@ -16,6 +16,22 @@ services:
       - 1883:1883
     restart: unless-stopped
 
+  frontend:
+    image: owntracks/frontend
+    depends_on:
+      - recorder
+    environment:
+      - LISTEN_PORT=8080
+      - SERVER_HOST=recorder
+      - SERVER_PORT=8083
+    ports:
+      - 8080:8080
+    volumes:
+      # The docs don't make it clear that this is required. When this file is
+      # missing, I get a browser error.
+      - ./frontend/config.js:/usr/share/nginx/html/config/config.js
+    restart: unless-stopped
+
   recorder:
     image: owntracks/recorder
     depends_on:
