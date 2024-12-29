@@ -42,10 +42,10 @@ services:
       # These are development values only. In production, they are secrets.
       - OTR_PASS=owntracks
       - OTR_USER=owntracks
-    ports:
-      # I don't need to expose this port on the host. This is just for
-      # development.
-      - 8083:8083
+    # ports:
+    #   # I don't need to expose this port on the host. This is just for
+    #   # development.
+    #   - 8083:8083
     volumes:
       - config:/config
       - store:/store
