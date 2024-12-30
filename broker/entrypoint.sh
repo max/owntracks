@@ -9,7 +9,7 @@ if [ -n "$TAILSCALE_AUTHKEY" ]; then
     echo "TAILSCALE_AUTHKEY is set. Setting up Tailscale."
 
     /usr/local/bin/tailscaled --state=/var/lib/tailscale/tailscaled.state --socket=/var/run/tailscale/tailscaled.sock &
-    /usr/local/bin/tailscale up --auth-key=${TAILSCALE_AUTHKEY} --hostname=mqtt
+    /usr/local/bin/tailscale up --auth-key=${TAILSCALE_AUTHKEY} --hostname=owntracks-broker
 else
     echo "Warning: TAILSCALE_AUTHKEY not set. Skipping Tailscale."
 fi
